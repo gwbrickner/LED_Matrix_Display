@@ -60,14 +60,13 @@ def display(strip, image):
 def main():
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     strip.begin()
+
+    image = Image.open("Sprite_heart.png")
     
-    for image in IMAGES:
-        image = functionalList(image)
+    image = functionalList(image)
     
     while True:
-        for image in IMAGES:
-                display(strip, image)
-                time.sleep(IMAGE_DELAY)
+        display(strip, image)
 
 
 if __name__ == "__main__":
