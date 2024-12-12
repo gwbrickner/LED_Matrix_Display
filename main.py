@@ -13,7 +13,8 @@
 from Christmas_Images import *
 from PIL import Image
 
-from rpi_ws281x import *
+import neopixel
+import board
 import time
 
 
@@ -26,7 +27,7 @@ LED_COUNT = 256
 LED_PIN = 18
 LED_FREQ_HZ = 800000
 LED_DMA = 10
-LED_BRIGHTNESS = 255
+LED_BRIGHTNESS = 1
 LED_INVERT = False
 LED_CHANNEL = 0
 
@@ -52,16 +53,17 @@ def display(strip, image):
     counter = 0
     for row in image:
         for colorTuple in row:
-            strip.setPixelColor(counter, Color(colorTuple[0], colorTuple[1], colorTuple[2]))
+
             counter += 1
     strip.show()
 
 
 def main():
-    strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+    strip = neopixel.NeoPixel(board.D18, LED_COUNT, 3, LED_BRIGHTNESS, True, 'RGB')
     strip.begin()
 
     image = Image.open("Sprite_heart.png")
+    print(image)
     
     image = functionalList(image)
     
